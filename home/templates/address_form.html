@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Create Address
+{% endblock %}
+
+{% block content %}
+  {% if form.is_valid %}
+    <p>New address created!</p>
+  {% else %}
+    <form method="post">
+      {% csrf_token %}
+      {% for error in form.non_field_errors %}
+        <div class="form-error">
+          {{ error }}
+        </div>
+      {% endfor %}
+      <div class="row">
+        <div class="col-9 mb-3">
+          {% for error in form.street.errors %}
+          <div class="form-error">{{ error }}</div>
+          {% endfor %}
+          <label for="{{ form.street.id_for_label}}" class="form-label">Street</label>
+          <input type="text" class="form-control" id="{{ form.street.id_for_label }}" name="{{ form.street.name }}" value="{{ form.street.value|default_if_none:'' }}">
+        </div> 
+        {% for error in form.city.errors %}
+          <label for="{{ form.city.id_for_label}}" class="form-label">City</label>
+          <input type="text" class="form-control" id="{{ form.city.id_for_label }}" name="{{ form.city.name }}" value="{{ form.city.value|default_if_none:'' }}">
+        {% endfor %}
+      </div>
+      <div class="mb-3">
+        {% for error in form.street.errors %}
+        <label for="{{ form.street.id_for_label}}" class="form-label">Street</label>
+        <input type="text" class="form-control" id="{{ form.street.id_for_label }}" name="{{ form.street.name }}" value="{{ form.street.value|default_if_none:'' }}">
+      </div> 
+      <button class="btn btn-outline-success" type="submit">Save</button>
+    </form>
+  {% endif %}
+{% endblock %}

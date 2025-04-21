@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block address_list_active %}
+  active
+{% endblock %}
+
+{% block title %}
+  Addresses
+{% endblock %}
+
+{% block content %}
+<h1>
+    Addresses
+    <a href="{% url 'address_create' %}" class="btn btn-outline-primary">New address</a>
+</h1>
+{% endblock %}

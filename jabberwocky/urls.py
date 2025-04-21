@@ -18,7 +18,7 @@ Including another URLconf
 from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path
-from home.views import HomeView
+from home.views import AddressCreateView, AddressListView, AddressUpdateView, AddressView, HomeView, PeopleView, PersonDetailView
 
 
 def inventory(request, foo, bar):
@@ -27,6 +27,14 @@ def inventory(request, foo, bar):
 
 urlpatterns = [
     path("<int:foo>/<str:bar>", inventory),
-    path("", HomeView.as_view()),
+    path("", HomeView.as_view(), name="home"),
     path("admin/", admin.site.urls),
+    path("people/", PeopleView.as_view(), name="people_list"),
+    path("people/<int:pk>/", PersonDetailView.as_view(), name="person_details"),
+    
+    path("addresses/", AddressListView.as_view(), name="address_list"),
+    path("addresses/<int:pk>/", AddressDetailView.as_view(), name="address_details"),
+    path("addresses/<int:pk>/edit", AddressUpdateView.as_view(), name="update_details"),
+    path("addresses/<int:pk>/delete", AddressDeleteView.as_view(), name="delete_details"),
+    path("addresses/create/", AddressCreateView.as_view(), name="create_create")
 ]
