@@ -12,6 +12,9 @@
             "args": [
                 "runserver"
             ],
+            "env": {
+                "TEST_VAR": "TEST"
+            },
             "envFile": "${workspaceFolder}/.env",
             "django": true,
             "autoStartBrowser": false,
